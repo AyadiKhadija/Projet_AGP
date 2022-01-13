@@ -3,6 +3,8 @@ package business.simulation;
 import java.util.ArrayList;
 import java.util.List;
 
+//test deuxieme commit
+
 /**
  * A bank is composed of cashiers and a queue.
  */
