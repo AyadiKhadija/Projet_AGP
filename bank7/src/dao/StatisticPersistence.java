@@ -1,7 +1,7 @@
 package dao;
 //salut c'est billal
 
-// salut c'est le boss c'est Enzo
+// salut c'est la baltringue Enzo
 import business.client.SimulationEntry;
 import business.simulation.StatisticManager;
 
