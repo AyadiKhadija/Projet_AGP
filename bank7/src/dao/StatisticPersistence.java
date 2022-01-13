@@ -4,7 +4,8 @@ package dao;
 // salut c'est la baltringue Enzo
 import business.client.SimulationEntry;
 import business.simulation.StatisticManager;
-//test encore
+//test encore2
+
 /**
  * General DAO interface for persistence APIs.
  */
