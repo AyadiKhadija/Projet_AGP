@@ -7,7 +7,7 @@ import business.client.SimulationEntry;
 import business.simulation.Simulation;
 import business.spring.SpringIoC;
 
-//Enzo la grosse merde de Vaureal
+//First Commit Avishka
 
 /**
  * Simulation bean controller used to collect simulation entry parameters and to start the simulation.
