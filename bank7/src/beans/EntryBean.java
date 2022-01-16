@@ -7,7 +7,7 @@ import business.client.SimulationEntry;
 import business.simulation.Simulation;
 import business.spring.SpringIoC;
 
-//Enzo la grosse merde du 95
+//Enzo la grosse merde de Vaureal
 
 /**
  * Simulation bean controller used to collect simulation entry parameters and to start the simulation.
