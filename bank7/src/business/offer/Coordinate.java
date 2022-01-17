@@ -1,8 +1,8 @@
 package business.offer;
 
 public class Coordinate {
-	int x;
-	int y;
+	private int x;
+	private int y;
 	
 	public Coordinate() {	}
 	

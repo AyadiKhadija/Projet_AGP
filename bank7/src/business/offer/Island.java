@@ -1,7 +1,7 @@
 package business.offer;
 
 public class Island {
-	String name;
+	private String name;
 	
 	public Island() {	}
 	
