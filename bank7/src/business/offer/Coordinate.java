@@ -1,5 +1,5 @@
 package business.offer;
-
+// Class Cordinate fonctionnelle
 public class Coordinate {
 	private int x;
 	private int y;
