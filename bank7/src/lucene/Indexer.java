@@ -1,5 +1,5 @@
 package lucene;
-
+//modification
 import java.io.File; 
 import java.io.FileFilter;
 import java.io.FileReader;
@@ -13,7 +13,9 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+
 public class Indexer {
+	
    private IndexWriter writer;
    public Indexer(String indexDirectoryPath) throws IOException {
       Directory indexDirectory = 
