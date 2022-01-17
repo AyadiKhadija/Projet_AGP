@@ -5,24 +5,50 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<title>Bank simulation</title>
+	<title>Simulation offre</title>
 </h:head>
 <h:body>
 	<p>
-		<strong>Welcome to bank simulation !</strong>
+		<strong>Welcome to trip offer simulation !</strong>
 	</p>
+	
+	<img alt="Image Canaries" src="canaries.jpg"  width="400" height="310"></img>
 
-	<h2>Please enter values for simulation parameters</h2>
+	<h2>Veuillez entrer vos selections pour votre sejour</h2>
 	<fieldset>
 		<h:form>
-			Simulation duration : <h:inputText value="#{entryBean.simulationDuration}" /> <br />
-			Cashier count : <h:inputText value="#{entryBean.cashierCount}" /> <br />
-			Min service time : <h:inputText value="#{entryBean.minServiceTime}" /> <br />
-			Max service time : <h:inputText value="#{entryBean.maxServiceTime}" /> <br />
-			Client arrival interval : <h:inputText value="#{entryBean.clientArrivalInterval}" /> <br />
-			Priority client rate : <h:inputText value="#{entryBean.priorityClientRate}" /> <br />
-			Client patience time : <h:inputText value="#{entryBean.clientPatienceTime}" /> <br />    
-			 
+		
+		
+			Prix Max : <h:inputText /> <br />
+			Prix min : <h:inputText/> <br />
+			<br />
+			
+			
+			Souhaitez vous un sejour intensif? (beaucoup d'excursion) <br />
+				<h:selectOneRadio layout="pageDirection">
+	  				<f:selectItem itemValue="id1" itemLabel="Oui" />
+	  				<f:selectItem itemValue="id2" itemLabel="Non" />
+				</h:selectOneRadio><br />
+			
+			
+			Souhaitez vous des vacances culturel ou sportive <br />
+				<h:selectOneRadio layout="pageDirection">
+	  				<f:selectItem itemValue="id3" itemLabel="Culturel" />
+	  				<f:selectItem itemValue="id4" itemLabel="Sportive" />
+				</h:selectOneRadio><br />
+			
+			Quelles activites souhaitez vous faire ?<br />
+				<h:selectManyCheckbox layout="pageDirection">
+				  <f:selectItem itemValue="id5" itemLabel="Jet ski" />
+				  <f:selectItem itemValue="id6" itemLabel="Parachute" />
+				  <f:selectItem itemValue="id7" itemLabel="Musee" />
+				  <f:selectItem itemValue="id8" itemLabel="Escalade" />
+				  <f:selectItem itemValue="id8" itemLabel="Corridor" />
+				  <f:selectItem itemValue="id8" itemLabel="Grotte" />
+				  <f:selectItem itemValue="id8" itemLabel="Randonnée" />
+				</h:selectManyCheckbox><br />
+			
+			
 			<h:commandButton value="Start" action="#{entryBean.startSimulation}" />
 		</h:form>
 	</fieldset>
