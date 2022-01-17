@@ -47,5 +47,5 @@ public abstract class Place {
 		this.price = price;
 	}
 	
-	 public abstract int comfort();
+	public abstract int comfort();
 }
