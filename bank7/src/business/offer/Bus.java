@@ -1,5 +1,5 @@
 package business.offer;
-
+//test
 //Class Bus fonctionnelle
 
 public class Bus extends Transport {
