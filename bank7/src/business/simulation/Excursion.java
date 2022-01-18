@@ -5,7 +5,7 @@ import business.offer.*;
 
 public class Excursion {
 	private String date;
-	private ArrayList<Journey> journeys = new ArrayList<Journey>();
+	private HashMap<Integer, ArrayList<Journey>> journeys = new HashMap<Integer, ArrayList<Journey>>();
 	
 	public Excursion() {} 
 	
@@ -21,11 +21,12 @@ public class Excursion {
 		this.date = date;
 	}
 
-	public ArrayList<Journey> getJourneys() {
+	
+	public HashMap<Integer, ArrayList<Journey>> getJourneys() {
 		return journeys;
 	}
-
-	public void setJourneys(ArrayList<Journey> journeys) {
+	
+	public void setJourneys(HashMap<Integer, ArrayList<Journey>>) {
 		this.journeys = journeys;
 	}
 	
