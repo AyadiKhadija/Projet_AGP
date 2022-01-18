@@ -7,14 +7,14 @@ import java.util.ArrayList;
  */
 public class EntryOffer {
     private int maxPrice;
-    private int isIntensity;
-    private int isCultural;
+    private boolean isIntensity;
+    private boolean isCultural;
     private ArrayList<String> keyWords;
 
     public EntryOffer() {
     }
 
-    public EntryOffer(int maxPrice,int isIntensity, int isCultural, ArrayList<String> keyWords) {
+    public EntryOffer(int maxPrice,boolean isIntensity, boolean isCultural, ArrayList<String> keyWords) {
         this.maxPrice = maxPrice;
         this.isIntensity = isIntensity;
         this.isCultural = isCultural;
@@ -29,20 +29,20 @@ public class EntryOffer {
         this.maxPrice = maxPrice;
     }
 
-    public int getIsIntensity() {
+    public boolean getIsIntensity() {
         return isIntensity;
     }
 
     
-    public void setIsIntensity(int isIntensity) {
+    public void setIsIntensity(boolean isIntensity) {
         this.isIntensity = isIntensity;
     }
 
-    public int getIsCultural() {
+    public boolean getIsCultural() {
         return isCultural;
     }
 
-    public void setIsCultural(int isCultural) {
+    public void setIsCultural(boolean isCultural) {
         this.isCultural = isCultural;
     }
 
