@@ -2,12 +2,12 @@ package business.offer;
 
 public abstract class Transport {
 	private int duration;
-	private int price;
+	private float price;
 	private int distance;
 	
 	public Transport() {}
 	
-	public Transport(int duration, int price, int distance) {
+	public Transport(int duration, float price, int distance) {
 		this.duration = duration;
 		this.price = price;
 		this.distance = distance;
@@ -21,7 +21,7 @@ public abstract class Transport {
 		this.duration = duration;
 	}
 
-	public int getPrice() {
+	public float getPrice() {
 		return price;
 	}
 

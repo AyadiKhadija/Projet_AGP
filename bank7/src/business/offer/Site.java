@@ -14,13 +14,6 @@ public class Site extends Place {
 		this.isTouristic = isTouristic;
 	}
 
-	@Override
-	public int comfort() {
-		// TODO Auto-generated method stub
-		
-		return 0;
-	}
-
 	public String getDescription() {
 		return description;
 	}

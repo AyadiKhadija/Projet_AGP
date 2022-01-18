@@ -19,28 +19,20 @@ public class Hotel extends Place {
 		this.stars = stars;
 	}
 	
-	@Override
 	public int comfort() {
-		// TODO Auto-generated method stub
-		int stars = getStars();
 		switch(stars) {
-			case 1: 
-	           return 2;
-	   
-	       case 2:
-	           return 4;
-	   
-	       case 3:
-	           return 6;
-	           
-	       case 4:
-	           return 8;
-	           
-	       case 5:
-	           return 10;
-	           
-	       default:
-	    	   return 2;
+			case 5:
+				return 10;
+			case 4:
+				return 8;
+			case 3:
+				return 6;
+			case 2:
+				return 4;
+			case 1:
+				return 2;
+			default:
+				return 2;
 		}
 	}
 

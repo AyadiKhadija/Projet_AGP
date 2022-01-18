@@ -43,9 +43,7 @@ public abstract class Place {
 		this.island = island;
 	}
 	
-	public void setPrice(float Price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
-	
-	public abstract int comfort();
 }

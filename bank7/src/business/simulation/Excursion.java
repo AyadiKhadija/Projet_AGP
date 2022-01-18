@@ -7,6 +7,8 @@ public class Excursion {
 	private String date;
 	private ArrayList<Journey> journeys = new ArrayList<Journey>();
 	
+	public Excursion() {} 
+	
 	public Excursion(String date) {
 		this.date = date;
 	}

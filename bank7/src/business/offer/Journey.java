@@ -7,18 +7,16 @@ public class Journey {
 	private Transport transport;
 	private float price;
 	private int duration;
-	private int comfort;
 	
 	public Journey() {}
 	
-	public Journey(Place departure, Place arrival, int distance, Transport transport, float price, int duration, int comfort) {
+	public Journey(Place departure, Place arrival, int distance, Transport transport, float price, int duration) {
 		this.departure = departure;
 		this.arrival = arrival;
 		this.distance = distance;
 		this.transport = transport;
 		this.price = price;
 		this.duration = duration;
-		this.comfort = comfort;
 	}
 
 	public Place getDeparture() {
@@ -67,14 +65,6 @@ public class Journey {
 
 	public void setDuration(int duration) {
 		this.duration = duration;
-	}
-
-	public int getComfort() {
-		return comfort;
-	}
-
-	public void setComfort(int comfort) {
-		this.comfort = comfort;
 	}
 	
 	
