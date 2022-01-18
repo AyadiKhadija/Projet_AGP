@@ -1,6 +1,8 @@
 package business.simulation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import business.offer.*;
 
 public class Excursion {
@@ -21,12 +23,11 @@ public class Excursion {
 		this.date = date;
 	}
 
-	
-	public HashMap<Integer, ArrayList<Journey>> getJourneys() {
+	public  HashMap<Integer, ArrayList<Journey>> getJourneys() {
 		return journeys;
 	}
-	
-	public void setJourneys(HashMap<Integer, ArrayList<Journey>>) {
+
+	public void setJourneys(HashMap<Integer, ArrayList<Journey>> journeys) {
 		this.journeys = journeys;
 	}
 	
