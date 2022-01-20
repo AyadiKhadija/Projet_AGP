@@ -14,7 +14,6 @@ import lucene.LuceneTester;
 
 public class jdbcPersistenceAGP implements PersistenceAGP{
 	
-
 	public static ResultSet QuerySite() {
 		
 		ResultSet result = null;
