@@ -5,9 +5,13 @@ import java.util.HashMap;
 import java.util.Random;
 
 import business.offer.*;
+import persistence.jdbc.BDe;
+import persistence.jdbc.jdbcPersistenceAGP;
 
 
 public class ExcursionManager {
+	
+	BDe bd = new BDe();
 	
 	public int getDistance(Place departure, Place arrival) {
 		int absDeparture = departure.getLocation().getX();
@@ -24,27 +28,18 @@ public class ExcursionManager {
 	
 	public Transport getTransport(Place departure, Place arrival) {
 		int distance = getDistance(departure, arrival);
-		int duration = 0;
-		float price = 0;
 		
-		if(!departure.getIsland().getName().equals(arrival.getIsland().getName())) {
-			Boat boat = new Boat();
-			duration = getDuration(boat, distance);
-			price = getPriceTransport(boat, distance);
-			return new Boat(duration, "Boat", distance);
+		if(!departure.getIsland().getName_island().equals(arrival.getIsland().getName_island())) {
+			String id_Transport = bd.executeTransportByNameIsland("Boat", departure.getIsland().getId_island());
+			return bd.executeTransportById(id_Transport).get(0);
 		}
 		else {
 			if(distance > 2) {
-				Bus bus = new Bus();
-				duration = getDuration(bus, distance);
-				price = getPriceTransport(bus, distance);
-				return new Bus(duration, "Bus", distance);
+				String id_Transport = bd.executeTransportByNameIsland("Bus", departure.getIsland().getId_island());
+				return bd.executeTransportById(id_Transport).get(0);
 			}
 			else {
-				Walk walk = new Walk();
-				duration = getDuration(walk, distance);
-				price = getPriceTransport(walk, distance);
-				return new Walk(duration, "Walk", distance);
+				return new Walk("", "Walk", departure.getIsland().getId_island());
 			}
 		}
 	}
@@ -83,59 +78,21 @@ public class ExcursionManager {
 		}
 	}
 	
-	/*public Journey createJourney(Place departure, Place arrival) {
-		Transport transport = getTransport(departure, arrival);
-		int distance = getDistance(departure, arrival);
-		float price = getPriceJourney(departure, arrival, transport, distance);
-		int duration = getDuration(transport, distance);
-		return new Journey(departure, arrival, distance, transport, price, duration);
-	}*/
-	
-	public ArrayList<Site> initSites() {
-		ArrayList<Site> sites = new ArrayList<Site>();
-		Island fuerte = new Island("Fuerte");
-		Island palma = new Island("Las Palma");
-		Island papa = new Island("Papa");
+	public float budgetPerPrice(EntryOffer entry, String type) {
+		float budget = entry.getMaxPrice();
 		
-		sites.add(new Site(1, true, "Museum", new Coordinate(8050,3800), fuerte, 15.0f));
-		sites.add(new Site(2, false, "Jet", new Coordinate(6500,1800), palma, 175.0f));
-		sites.add(new Site(3, true, "Grotte", new Coordinate(3650,2840), papa, 5.0f));
-		sites.add(new Site(4, false, "Parachute", new Coordinate(7800,2780), fuerte, 150.0f));
-		sites.add(new Site(5, false, "Sous-marin", new Coordinate(6800,2790), palma, 250.0f));
-		sites.add(new Site(6, false, "Cheval", new Coordinate(3190,1800), papa, 125.0f));
-		sites.add(new Site(7, true, "Art", new Coordinate(7890,2050), fuerte, 7.5f));
-		sites.add(new Site(8, true, "Memorial", new Coordinate(6100,1100), palma, 2.0f));
-		sites.add(new Site(9, true, "Monument", new Coordinate(2905,1920), papa, 7.0f));
-		sites.add(new Site(10, false, "Surf", new Coordinate(8900,2640), fuerte, 105.0f));
-		sites.add(new Site(11, false, "Escalade", new Coordinate(6200,1100), palma, 85.0f));
-		sites.add(new Site(12, false, "Patinoire", new Coordinate(3500,1600), papa, 10.0f));
-		
-		return sites;
+		if(type.equals("Hotel")) {
+			budget /= 5;
+		}
+		else if (type.equals("Site")) {
+			if(entry.getIsIntensity() == true)	budget /= 10;
+			else budget /=4;
+		}
+		return budget;
 	}
 	
-	public ArrayList<Hotel> initHotels() {
-		ArrayList<Hotel> hotels = new ArrayList<Hotel>();
-		Island fuerte = new Island("Fuerte");
-		Island palma = new Island("Las Palma");
-		Island papa = new Island("Papa");
-		
-		hotels.add(new Hotel(5, "Hotel-A", new Coordinate(8450,2050), fuerte, 250.0f));
-		hotels.add(new Hotel(3, "Hotel-B", new Coordinate(6500,2600), palma, 120.0f));
-		hotels.add(new Hotel(2, "Hotel-C", new Coordinate(4000,3200), papa, 75.0f));
-		hotels.add(new Hotel(5, "Hotel-D", new Coordinate(8150,3200), fuerte, 350.0f));
-		hotels.add(new Hotel(4, "Hotel-E", new Coordinate(6800,2000), palma, 175.0f));
-		hotels.add(new Hotel(2, "Hotel-F", new Coordinate(2900,1740), papa, 95.0f));
-		hotels.add(new Hotel(3, "Hotel-G", new Coordinate(7909,1900), fuerte, 115.0f));
-		hotels.add(new Hotel(5, "Hotel-H", new Coordinate(6000,1000), palma, 325.0f));
-		hotels.add(new Hotel(2, "Hotel-G", new Coordinate(2990,1700), papa, 100.0f));
-		hotels.add(new Hotel(4, "Hotel-I", new Coordinate(8085,2907), fuerte, 152.0f));
-		hotels.add(new Hotel(5, "Hotel-J", new Coordinate(6300,1500), palma, 275.0f));
-		hotels.add(new Hotel(4, "Hotel-K", new Coordinate(4040,3290), papa, 140.0f));
-		
-		return hotels;
-	}
 	
-	public ArrayList<Place> sortHotelbyPrice(EntryOffer entry) {
+	/*public ArrayList<Place> sortHotelbyPrice(EntryOffer entry) {
 		float hotelBudget = entry.getMaxPrice()*0.6f;
 		float budgetPerNight = hotelBudget/5;
 		ArrayList<Hotel> hotels = initHotels();
@@ -171,6 +128,23 @@ public class ExcursionManager {
 		}
 		System.out.println("Tailles de l'AL des sites possible pour moi " + mySites.size());
 		return mySites;
+	}*/
+	
+	public ArrayList<Place> sortHotelbyPrice(EntryOffer entry) {
+		float budget = budgetPerPrice(entry, "Hotel");
+		ArrayList<Hotel> hotels = bd.executeListHotel((int)budget);
+		ArrayList<Place> places = new ArrayList<Place>();
+		for(int i = 0; i<hotels.size();i++) {
+			places.add(hotels.get(i));
+		}
+		
+		return places;
+	}
+	
+	public ArrayList<Site> sortSitebyPrice(EntryOffer entry) {
+		float budget = budgetPerPrice(entry, "Site");
+		ArrayList<Site> sites = bd.executeListSite((int)budget);
+		return sites;
 	}
 	
 	public ArrayList<Place> sortSitebyFunction(ArrayList<Site> sites, EntryOffer entry) {
@@ -217,7 +191,7 @@ public class ExcursionManager {
 		//Place departure = hotels.get(randomHotel);
 		int randomHotel;
 		Place arrival;
-		
+		 
 		ArrayList<Place> places = new ArrayList<Place>();
 		
 		for(int i = 0; i<3; i++) {
@@ -237,15 +211,10 @@ public class ExcursionManager {
 				places = radius(departure,selectedSites);
 				if(places.size()==1) {
 					places = radius(departure,hotels);
-					System.out.println("A");
 					randomHotel = (int) (Math.random() * places.size());
-					System.out.println("B");
 					arrival = places.get(randomHotel);
-					System.out.println("C");
 					Journey journey = addJourney(departure, arrival);
-					System.out.println("D");
 					journeys.add(journey);
-					System.out.println("E");
 					break;
 				}
 				else {
@@ -281,7 +250,6 @@ public class ExcursionManager {
 		int distance = getDistance(departure, arrival);
 		Transport transport = getTransport(departure, arrival);
 		float transportPrice = getPriceTransport(transport, distance);
-		transport.setPrice((int)transportPrice);
 		float price = getPriceJourney(departure, arrival, transport, distance);
 		System.out.println("Le prix du trajet sans l'hotel est " + price + "�" + "("+ transportPrice + "� pour transport et " + (price - transportPrice) + "� pour le site pour " + distance + "km avec Depart = "+ departure.getName() + " et arriv� = " + arrival.getName());
 		int duration = getDuration(transport, distance);
@@ -295,8 +263,8 @@ public class ExcursionManager {
 		ArrayList<Place> hotels = sortHotelbyPrice(entry);
 		for(int i = 0; i<excursionPerDay; i++) {
 			if(i==0) {
-				/*int randomHotel = (int) (Math.random() * hotels.size());
-				departure = hotels.get(randomHotel);*/
+				int randomHotel = (int) (Math.random() * hotels.size());
+				departure = hotels.get(randomHotel);
 				journeys = createJourneys(entry, departure);
 				excursions.put(i, journeys);
 			}
