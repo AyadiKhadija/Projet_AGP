@@ -141,13 +141,35 @@ public class ExcursionManager {
 		return places;
 	}
 	
-	public ArrayList<Site> sortSitebyPrice(EntryOffer entry) {
+	public ArrayList<Site> sortSitebyPrice(EntryOffer entry, ArrayList<Site> wantedSites) {
 		float budget = budgetPerPrice(entry, "Site");
-		ArrayList<Site> sites = bd.executeListSite((int)budget);
+		//ArrayList<Site> sites = bd.executeListSite((int)budget);
+		ArrayList<Site> sites = new ArrayList<Site>();
+		for(int i = 0; i<wantedSites.size(); i++) {
+			if(wantedSites.get(i).getPrice()<budget) {
+				sites.add(wantedSites.get(i));
+			}
+		}
 		return sites;
 	}
 	
-	public ArrayList<Place> sortSitebyFunction(ArrayList<Site> sites, EntryOffer entry) {
+	public ArrayList<Site> sortSitebyFunction(EntryOffer entry, ArrayList<Site> wantedSites, ArrayList<Site> allSite) {
+		ArrayList<Site> sites = new ArrayList<Site>();
+		for(int i = 0; i<sites.size(); i++) {
+			double random = Math.random();
+			if(sites.get(i).isTouristic() == entry.getIsCultural()) {
+				if(random<0.8) {
+					//sites.
+				}
+			}
+		}
+		
+		
+		return sites;
+	}
+	
+	
+	/*public ArrayList<Place> sortSitebyFunction(ArrayList<Site> sites, EntryOffer entry) {
 		ArrayList<Place> siteByFunction = new ArrayList<Place>();
 		for(int i = 0; i<sites.size(); i++) {
 			double random = Math.random();
@@ -164,7 +186,7 @@ public class ExcursionManager {
 			}
 		}
 		return siteByFunction;
-	}
+	}*/
 	
 	
 	public ArrayList<Place> radius(Place departure, ArrayList<Place> place) {
@@ -175,16 +197,19 @@ public class ExcursionManager {
 				compatiblePlaces.add(place.get(i));
 			}
 		}
-		System.out.println("Places compatible avec moi " + compatiblePlaces.size());
+		//System.out.println("Places compatible avec moi " + compatiblePlaces.size());
 		return compatiblePlaces;
 	}
 	
 	
 	public ArrayList<Journey> createJourneys(EntryOffer entry, Place departure) {
 		ArrayList<Journey> journeys = new ArrayList<Journey>();
+		float budget = budgetPerPrice(entry, "Site");
 		
 		ArrayList<Place> hotels = sortHotelbyPrice(entry);
-		ArrayList<Site> sites = sortSitebyPrice(entry);
+		ArrayList<Site> wantedSites = bd.executeTheQueryMixed(entry.getKeyWords());
+		ArrayList<Site> sites = sortSitebyPrice(entry, wantedSites);
+		ArrayList<Site> allSites = bd.executeListSite((int)budget);
 		ArrayList<Place> selectedSites = sortSitebyFunction(sites, entry);
 		
 		//int randomHotel = (int) (Math.random() * hotels.size());
