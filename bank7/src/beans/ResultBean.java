@@ -1,5 +1,7 @@
 package beans;
 
+import java.util.ArrayList;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -7,6 +9,10 @@ import javax.faces.bean.RequestScoped;
 
 import org.primefaces.model.chart.PieChartModel;
 
+import business.offer.Journey;
+import business.offer.Offer;
+import business.simulation.Excursion;
+import business.simulation.OfferManager;
 import business.simulation.Simulation;
 import dao.StatisticPersistence;
 
@@ -19,7 +25,6 @@ import dao.StatisticPersistence;
 @RequestScoped
 public class ResultBean {
 
-	private PieChartModel pieModel1;
 
 	@ManagedProperty(value = "#{entryBean}")
 	private EntryBean entryBean;
@@ -27,66 +32,82 @@ public class ResultBean {
 	public ResultBean() {
 
 	}
+	
+	private ArrayList<Offer> offers;
+	
+	private Offer offer;
+	
+	
+	
+	private OfferManager offermanager = new OfferManager();
 
 	@PostConstruct
-	private void createPieModel1() {
-		pieModel1 = new PieChartModel();
 
-		pieModel1.set("Served Clients", getServedClientCount());
-		pieModel1.set("Non-Served Clients", getNonServedClientCount());
 
-		pieModel1.setTitle("Client service rate");
-		pieModel1.setLegendPosition("w");
-		pieModel1.setShadow(false);
-	}
-
-	public PieChartModel getPieModel1() {
-		return pieModel1;
-	}
-
-	public void setPieModel1(PieChartModel pieModel1) {
-		this.pieModel1 = pieModel1;
-	}
 
 	public EntryBean getEntryBean() {
 		return entryBean;
 	}
+	
 
 	public void setEntryBean(EntryBean entryBean) {
 		this.entryBean = entryBean;
 	}
-
-	public int getServedClientCount() {
-		Simulation simulation = entryBean.getSimulation();
-		int idEntry = simulation.getIdEntry();
-		StatisticPersistence statisticPersistence = simulation.getStatisticPersistence();
-		return statisticPersistence.servedClientCount(idEntry);
+/*
+	public int getMoffers() {
+		return entryBean.getOfferManager().test();
+	}*/
+	
+	public Offer getOneOffer() {
+		return entryBean.getOfferManager().createOffer(entryBean.getEntry());
 	}
-
-	public int getNonServedClientCount() {
-		Simulation simulation = entryBean.getSimulation();
-		int idEntry = simulation.getIdEntry();
-		StatisticPersistence statisticPersistence = simulation.getStatisticPersistence();
-		return statisticPersistence.nonServedClientCount(idEntry);
+	
+	public ArrayList<Offer> getMoffers() {
+		return entryBean.getOfferManager().createMultipleOffers(entryBean.getEntry());
 	}
-
-	public double getAverageClientWaitingTime() {
-		Simulation simulation = entryBean.getSimulation();
-		return simulation.getStatisticManager().calculateAverageClientWaitingTime();
+	
+	public Journey getMJouney() {
+		Offer o=entryBean.getOfferManager().createOffer(entryBean.getEntry());
+		Excursion e=o.getExcursions().get(0);
+		Journey j=e.getJourneys().get(0).get(1);
+		return j;
 	}
-
-	public double getAverageClientServiceTime() {
-		Simulation simulation = entryBean.getSimulation();
-		return simulation.getStatisticManager().calculateAverageClientServiceTime();
+	
+	
+	
+	public Excursion getMExcursion() {
+		Offer o=entryBean.getOfferManager().createOffer(entryBean.getEntry());
+		Excursion e=o.getExcursions().get(0);
+		return e;
 	}
+	
+	
+	
+	   public void init() {
+	        offers = offermanager.createMultipleOffers(entryBean.getEntry());
+	    }
+	    
+	    public String printInfos() {
+	    	return "entry";
+	    }
 
-	public double getCashierOccupationRate() {
-		Simulation simulation = entryBean.getSimulation();
-		return simulation.getStatisticManager().calculateAverageCashierOccupationRate(entryBean.getCashierCount());
-	}
+		public ArrayList<Offer> getOffers() {
+			return entryBean.getOfferManager().createMultipleOffers(entryBean.getEntry());
+		}
 
-	public double getClientSatisfactionRate() {
+
+		public void setOffers(ArrayList<Offer> offers) {
+			this.offers = offers;
+		}
+
+
+	
+	
+
+	
+/*	public ArrayList<Offer> getMOffers() {
 		Simulation simulation = entryBean.getSimulation();
 		return simulation.getStatisticManager().calculateClientSatisfactionRate();
-	}
+	}*/
+
 }

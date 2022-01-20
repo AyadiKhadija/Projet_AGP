@@ -156,19 +156,21 @@ public class ExcursionManager {
 	public ArrayList<Place> sortSitebyFunction(EntryOffer entry, ArrayList<Site> wantedSites, ArrayList<Site> allSite) {
 		ArrayList<Place> sites = new ArrayList<Place>();
 		
-		for(int j = 0; j<wantedSites.size(); j++) {
-			sites.add(wantedSites.get(j));
-		}
-		
+		//(int i = 0; i<2; i++) {
+			for(int j = 0; j<wantedSites.size(); j++) {
+				sites.add(wantedSites.get(j));
+			}
+		//}
+		//Tu pense que vous pouvez terminer le rapport COO ce soir ?! ???????
 		for(int i = 0; i<allSite.size(); i++) {
 			double random = Math.random();
 			if(allSite.get(i).isTouristic() == entry.getIsCultural()) {
-				if(random<0.6) {
+				if(random<0.3) {
 					sites.add(allSite.get(i));
 				}
 			}
 			else {
-				if(random<0.2) {
+				if(random<0.1) {
 					sites.add(allSite.get(i));
 				}
 			}

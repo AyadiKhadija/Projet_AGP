@@ -1,13 +1,14 @@
 package beans;
 
+import java.util.ArrayList;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import business.client.SimulationEntry;
-import business.simulation.Simulation;
+import business.offer.EntryOffer;
+import business.simulation.OfferManager;
 import business.spring.SpringIoC;
 
-//First Commit Avishka
 
 /**
  * Simulation bean controller used to collect simulation entry parameters and to start the simulation.
@@ -21,90 +22,67 @@ public class EntryBean {
 	/**
 	 * Proxy encapsulated object. All get/set of parameters work on this proxy object.
 	 */
-	private SimulationEntry entry = new SimulationEntry();
+	private EntryOffer entry = new EntryOffer();
 
-	private Simulation simulation = (Simulation) SpringIoC.getBean("simulation");;
+	private OfferManager offermanager = new OfferManager();
 
 	public EntryBean() {
 	}
 
 	public String startSimulation() {
-		simulation.setSimulationEntry(entry);
-		simulation.buildBank();
-		simulation.simulate();
+		offermanager.createMultipleOffers(entry);
+		//offermanager.buildBank();
+		//offermanager.simulate();
 		return "result";
 	}
 
-	public SimulationEntry getEntry() {
+	public EntryOffer getEntry() {
 		return entry;
 	}
 
-	public void setEntry(SimulationEntry entry) {
+	public void setEntry(EntryOffer entry) {
 		this.entry = entry;
 	}
 
-	public Simulation getSimulation() {
-		return simulation;
+	public OfferManager getOfferManager() {
+		return offermanager;
 	}
 
-	public void setSimulation(Simulation simulation) {
-		this.simulation = simulation;
+	public void setOfferManager(OfferManager offermanager) {
+		this.offermanager = offermanager;
 	}
 
-	public int getSimulationDuration() {
-		return entry.getSimulationDuration();
+	public int getMaxPrice() {
+		return entry.getMaxPrice();
 	}
 
-	public void setSimulationDuration(int simulationDuration) {
-		entry.setSimulationDuration(simulationDuration);
+	public void setMaxPrice(int maxPrice) {
+		entry.setMaxPrice(maxPrice);
 	}
 
-	public int getCashierCount() {
-		return entry.getCashierCount();
+	public boolean getIsIntensity() {
+		return entry.getIsIntensity();
 	}
 
-	public void setCashierCount(int cashierCount) {
-		entry.setCashierCount(cashierCount);
+	public void setIsIntensity(boolean isIntensity) {
+		entry.setIsIntensity(isIntensity);
 	}
 
-	public int getMinServiceTime() {
-		return entry.getMinServiceTime();
+	public boolean getIsCultural() {
+		return entry.getIsCultural();
 	}
 
-	public void setMinServiceTime(int minServiceTime) {
-		entry.setMinServiceTime(minServiceTime);
+	public void setIsCultural(boolean isCultural) {
+		entry.setIsCultural(isCultural);
 	}
 
-	public int getMaxServiceTime() {
-		return entry.getMaxServiceTime();
+	public ArrayList<String> getKeyWords() {
+		return entry.getKeyWords();
 	}
 
-	public void setMaxServiceTime(int maxServiceTime) {
-		entry.setMaxServiceTime(maxServiceTime);
+	public void setKeyWords(ArrayList<String> keyWords) {
+		entry.setKeyWords(keyWords);
 	}
 
-	public int getClientArrivalInterval() {
-		return entry.getClientArrivalInterval();
-	}
-
-	public void setClientArrivalInterval(int clientArrivalInterval) {
-		entry.setClientArrivalInterval(clientArrivalInterval);
-	}
-
-	public double getPriorityClientRate() {
-		return entry.getPriorityClientRate();
-	}
-
-	public void setPriorityClientRate(double priorityClientRate) {
-		entry.setPriorityClientRate(priorityClientRate);
-	}
-
-	public int getClientPatienceTime() {
-		return entry.getClientPatienceTime();
-	}
-
-	public void setClientPatienceTime(int clientPatienceTime) {
-		entry.setClientPatienceTime(clientPatienceTime);
-	}
 
 }

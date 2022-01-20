@@ -19,26 +19,29 @@
 		<h:form>
 		
 		
-			Prix Max : <h:inputText /> <br />
-			Prix min : <h:inputText/> <br />
+			Prix Max : <h:inputText value="#{entryBean.maxPrice}" > 
+			<f:validateLongRange minimum="900" />
+			</h:inputText>
+			<br />
 			<br />
 			
 			
 			Souhaitez vous un sejour intensif? (beaucoup d'excursion) <br />
-				<h:selectOneRadio layout="pageDirection">
-	  				<f:selectItem itemValue="id1" itemLabel="Oui" />
-	  				<f:selectItem itemValue="id2" itemLabel="Non" />
+				<h:selectOneRadio layout="pageDirection" value="#{entryBean.isIntensity}">
+	  				<f:selectItem itemValue="true" itemLabel="Oui" />
+	  				<f:selectItem itemValue="false" itemLabel="Non" />
 				</h:selectOneRadio><br />
+				
 			
 			
 			Souhaitez vous des vacances culturel ou sportive <br />
-				<h:selectOneRadio layout="pageDirection">
-	  				<f:selectItem itemValue="id3" itemLabel="Culturel" />
-	  				<f:selectItem itemValue="id4" itemLabel="Sportive" />
+				<h:selectOneRadio layout="pageDirection" value="#{entryBean.isCultural}">
+	  				<f:selectItem itemValue="true" itemLabel="Culturel" />
+	  				<f:selectItem itemValue="false" itemLabel="Sportive" />
 				</h:selectOneRadio><br />
 			
 			Quelles activites souhaitez vous faire ?<br />
-				<h:selectManyCheckbox layout="pageDirection">
+				<h:selectManyCheckbox layout="pageDirection" value="#{entryBean.keyWords}">
 				  <f:selectItem itemValue="id5" itemLabel="Jet ski" />
 				  <f:selectItem itemValue="id6" itemLabel="Parachute" />
 				  <f:selectItem itemValue="id7" itemLabel="Musee" />

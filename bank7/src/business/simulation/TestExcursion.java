@@ -10,12 +10,21 @@ import business.offer.Journey;
 import business.offer.Offer;
 import business.offer.Site;
 import business.offer.Transport;
-import dao.BDe;
+import persistence.jdbc.BDe;
 import persistence.jdbc.jdbcPersistenceAGP;
 
 public class TestExcursion {
 	public static void main(String[] args) {
-		EntryOffer entry = new EntryOffer(3600, true, false, null);
+		
+		/*BDe bd = new BDe();
+		String id_Transport = bd.executeTransportByNameIsland("Boat", "1116");
+		System.out.println(id_Transport);*/
+		ArrayList<String> mots = new ArrayList<String>();
+		mots.add("jet");
+		mots.add("montagne");
+		//mots.add("parachute");
+		mots.add("pont");
+		EntryOffer entry = new EntryOffer(2500, true, false, mots);
 		ExcursionManager em = new ExcursionManager();
 			
 		
@@ -49,7 +58,7 @@ public class TestExcursion {
 		
 		
 		//TEST3
-		/*OfferManager om= new OfferManager();
+		OfferManager om= new OfferManager();
 		Offer offer = om.createOffer(entry);
 		ArrayList<Excursion> exc = offer.getExcursions();
 		for(int k = 0; k<exc.size(); k++) {
@@ -60,19 +69,23 @@ public class TestExcursion {
 				for(int j = 0; j<excursions.get(i).size(); j++) {
 					
 					if( excursions.get(i).get(j).getTransport() instanceof Boat) {
-						transportName = "Boat";
+						transportName = "Bateau";
 					}
 					else {
 						transportName = "Bus";
 					}
 					
-					System.out.println("Departure = " + excursions.get(i).get(j).getDeparture().getName() + excursions.get(i).get(j).getDeparture().getIsland().getName() +"\t" + transportName + "\t Arrival = " + excursions.get(i).get(j).getArrival().getName() + excursions.get(i).get(j).getArrival().getIsland().getName() + " Jour = " + exc1.getDate());
+					System.out.println("Departure = " + excursions.get(i).get(j).getDeparture().getName() + excursions.get(i).get(j).getDeparture().getIsland().getName_island() +"\t" + transportName + "\t Arrival = " + excursions.get(i).get(j).getArrival().getName() + excursions.get(i).get(j).getArrival().getIsland().getName_island() + " Jour = " + exc1.getDate());
 				}
 				System.out.println("---");
 			}
 			
 		}
-		System.out.println("Le prix total de l'offre est " + offer.getPrice() + "€");*/
+		System.out.println("Le prix total de l'offre est " + offer.getPrice() + "€");
+		
+		
+		
+
 		
 		
 		//TEST 4
@@ -97,7 +110,7 @@ public class TestExcursion {
 		}*/
 		
 		//TEST7
-		String id_Transport = jdbcPersistenceAGP.QueryTransportByNameIsland("Bateau", "1111");
-		System.out.println(id_Transport);
+		/*String id_Transport = jdbcPersistenceAGP.QueryTransportByNameIsland("Bateau", "1111");
+		System.out.println(id_Transport);*/
 	}
 }

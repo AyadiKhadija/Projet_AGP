@@ -24,7 +24,7 @@ public class EntryOffer {
         return maxPrice;
     }
 
-    public void setSimulationDuration(int maxPrice) {
+    public void setMaxPrice(int maxPrice) {
         this.maxPrice = maxPrice;
     }
 

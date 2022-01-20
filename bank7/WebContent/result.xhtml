@@ -6,29 +6,49 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Simulation result</title>
+	<title>Offres iles Canaries</title>
 </h:head>
 <h:body>
 	<fieldset>
 		<legend>
-			<strong>In memory simulation result</strong>
-		</legend>		
-	
-		Average client waiting time : #{resultBean.averageClientWaitingTime} <br /> 
-		Average client service time : #{resultBean.averageClientServiceTime} <br />
-		Cashier occupation rate : #{resultBean.cashierOccupationRate} % <br /> 
-		Client satisfaction rate : #{resultBean.clientSatisfactionRate} % <br />
-
-	</fieldset>
-	<fieldset>
-		<legend>
-			<strong>Persisted simulation result</strong>
-		</legend>		
-		Served client count : #{resultBean.servedClientCount} <br />
-		Non Served client count : #{resultBean.nonServedClientCount} <br /> 
+			<strong>Les iles Canaries vous proposes</strong>
+		</legend>
 		
-		<p:chart type="pie" model="#{resultBean.pieModel1}" style="width:400px;height:300px" /> <br />
+		
+		<p:dataTable id="offerTable" var="offer" value="#{resultBean.offers}">
+			<p:column headerText="Proposition d'offre">
+                <h:outputText value="Nous vous proposons une offre a #{offer.price} €" />
+            </p:column>
+            <p:column headerText="Details offres:">
+                <p:dataTable var="excursion" value="#{offer.excursions}" >
+                	<p:column>
+         
+               			<h:outputText value="Jour #{excursion.date}" />
+               			<p:dataList var="route" value="#{excursion.journeys}">
+               				<p:column headerText="Departure location :">
+                				<!--<h:outputText value="#{route.key}" />-->
+                				<h:outputText value="Excursion" />
+                				<br />
+                				<br />
+                				<p:dataList var="j" value="#{route.value}">
+                					
+                					<strong><h:outputText value="Depart : " /></strong>
+                					<h:outputText value="#{j.departure.name}" /><br />
+                					<strong><h:outputText value="Arrivee : " /></strong>
+                					<h:outputText value="#{j.arrival.name}" /><br />
+                					<strong><h:outputText value="Prix trajet : " /></strong>
+                					<h:outputText value="#{j.price}" /><br /><br />
+
+                				</p:dataList>
+            				</p:column>
+               			</p:dataList>
+            		</p:column>
+                </p:dataTable>
+            </p:column>
+		
+		</p:dataTable>
 
 	</fieldset>
+
 </h:body>
 </html>
