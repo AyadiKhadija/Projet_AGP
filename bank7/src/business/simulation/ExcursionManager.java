@@ -97,18 +97,18 @@ public class ExcursionManager {
 		Island palma = new Island("Las Palma");
 		Island papa = new Island("Papa");
 		
-		sites.add(new Site("", true, "Museum", new Coordinate(8050,3800), fuerte, 15.0f));
-		sites.add(new Site("", false, "Jet", new Coordinate(6500,1800), palma, 175.0f));
-		sites.add(new Site("", true, "Grotte", new Coordinate(3650,2840), papa, 5.0f));
-		sites.add(new Site("", false, "Parachute", new Coordinate(7800,2780), fuerte, 150.0f));
-		sites.add(new Site("", false, "Sous-marin", new Coordinate(6800,2790), palma, 250.0f));
-		sites.add(new Site("", false, "Cheval", new Coordinate(3190,1800), papa, 125.0f));
-		sites.add(new Site("", true, "Art", new Coordinate(7890,2050), fuerte, 7.5f));
-		sites.add(new Site("", true, "Memorial", new Coordinate(6100,1100), palma, 2.0f));
-		sites.add(new Site("", true, "Monument", new Coordinate(2905,1920), papa, 7.0f));
-		sites.add(new Site("", false, "Surf", new Coordinate(8900,2640), fuerte, 105.0f));
-		sites.add(new Site("", false, "Escalade", new Coordinate(6200,1100), palma, 85.0f));
-		sites.add(new Site("", false, "Patinoire", new Coordinate(3500,1600), papa, 10.0f));
+		sites.add(new Site(1, true, "Museum", new Coordinate(8050,3800), fuerte, 15.0f));
+		sites.add(new Site(2, false, "Jet", new Coordinate(6500,1800), palma, 175.0f));
+		sites.add(new Site(3, true, "Grotte", new Coordinate(3650,2840), papa, 5.0f));
+		sites.add(new Site(4, false, "Parachute", new Coordinate(7800,2780), fuerte, 150.0f));
+		sites.add(new Site(5, false, "Sous-marin", new Coordinate(6800,2790), palma, 250.0f));
+		sites.add(new Site(6, false, "Cheval", new Coordinate(3190,1800), papa, 125.0f));
+		sites.add(new Site(7, true, "Art", new Coordinate(7890,2050), fuerte, 7.5f));
+		sites.add(new Site(8, true, "Memorial", new Coordinate(6100,1100), palma, 2.0f));
+		sites.add(new Site(9, true, "Monument", new Coordinate(2905,1920), papa, 7.0f));
+		sites.add(new Site(10, false, "Surf", new Coordinate(8900,2640), fuerte, 105.0f));
+		sites.add(new Site(11, false, "Escalade", new Coordinate(6200,1100), palma, 85.0f));
+		sites.add(new Site(12, false, "Patinoire", new Coordinate(3500,1600), papa, 10.0f));
 		
 		return sites;
 	}
@@ -267,7 +267,7 @@ public class ExcursionManager {
 			float transportPrice = getPriceTransport(transport, distance);
 			transport.setPrice((int)transportPrice);
 			float price = getPriceJourney(departure, arrival, transport, distance);
-			System.out.println("Le prix du trajet sans l'hotel est " + price + "€" + "("+ transportPrice + "€ pour transport et " + (price - transportPrice) + "€ pour le site pour " + distance + "km)");
+			System.out.println("Le prix du trajet sans l'hotel est " + price + "ï¿½" + "("+ transportPrice + "ï¿½ pour transport et " + (price - transportPrice) + "ï¿½ pour le site pour " + distance + "km)");
 			int duration = getDuration(transport, distance);*/
 			Journey journey = addJourney(departure, arrival);
 			journeys.add(journey);
@@ -283,7 +283,7 @@ public class ExcursionManager {
 		float transportPrice = getPriceTransport(transport, distance);
 		transport.setPrice((int)transportPrice);
 		float price = getPriceJourney(departure, arrival, transport, distance);
-		System.out.println("Le prix du trajet sans l'hotel est " + price + "€" + "("+ transportPrice + "€ pour transport et " + (price - transportPrice) + "€ pour le site pour " + distance + "km avec Depart = "+ departure.getName() + " et arrivé = " + arrival.getName());
+		System.out.println("Le prix du trajet sans l'hotel est " + price + "ï¿½" + "("+ transportPrice + "ï¿½ pour transport et " + (price - transportPrice) + "ï¿½ pour le site pour " + distance + "km avec Depart = "+ departure.getName() + " et arrivï¿½ = " + arrival.getName());
 		int duration = getDuration(transport, distance);
 		return new Journey(departure, arrival, distance, transport, price, duration);
 	}
