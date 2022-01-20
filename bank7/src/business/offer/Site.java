@@ -2,24 +2,28 @@ package business.offer;
 
 public class Site extends Place {
 	
-	private String description;
 	private boolean isTouristic;
+	private int id_site;
 	
 	
 	public Site() { }
 	
-	public Site(String description, boolean isTouristic, String name, Coordinate location, Island island, float price) {
+	public Site(int id_site,boolean isTouristic, String name, Coordinate location, Island island, float price) {
 		super(name, location, island, price);
-		this.description = description;
 		this.isTouristic = isTouristic;
+		this.id_site= id_site;
 	}
 
-	public String getDescription() {
-		return description;
+	
+
+	
+
+	public int getId_site() {
+		return id_site;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setId_site(int id_site) {
+		this.id_site = id_site;
 	}
 
 	public boolean isTouristic() {
@@ -29,6 +33,7 @@ public class Site extends Place {
 	public void setTouristic(boolean isTouristic) {
 		this.isTouristic = isTouristic;
 	}
+
 	
 	
 	

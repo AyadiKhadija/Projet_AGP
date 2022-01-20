@@ -11,8 +11,7 @@ public class EntryOffer {
     private boolean isCultural;
     private ArrayList<String> keyWords;
 
-    public EntryOffer() {
-    }
+    public EntryOffer() {     }
 
     public EntryOffer(int maxPrice,boolean isIntensity, boolean isCultural, ArrayList<String> keyWords) {
         this.maxPrice = maxPrice;

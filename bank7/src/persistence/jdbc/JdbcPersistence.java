@@ -109,7 +109,7 @@ public class JdbcPersistence implements StatisticPersistence {
 			preparedStatement.setInt(1, simulationEntryId);
 
 			ResultSet result = preparedStatement.executeQuery();
-
+			
 			result.next();
 			count = result.getInt("co");
 

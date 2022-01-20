@@ -7,8 +7,11 @@ public class Offer {
 	private float price;
 	ArrayList<Excursion> excursions = new ArrayList<Excursion>();
 	
-	public Offer(float price) {
+	public Offer() {}
+	
+	public Offer(float price, ArrayList<Excursion> excursions) {
 		this.price = price;
+		this.excursions = excursions;
 	}
 
 	public float getPrice() {

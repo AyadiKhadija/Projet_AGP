@@ -1,7 +1,11 @@
 package dao;
 
+import java.sql.ResultSet;
+import java.util.HashMap;
+
 public interface PersistenceAGP {
 	
-	int QuerySite(String keyWord);
+	static ResultSet QuerySite();
+	
 
 }
