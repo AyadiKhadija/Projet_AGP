@@ -4,15 +4,15 @@ public class Walk extends Transport {
 	
 	public Walk() {}
 	
-	public Walk(int duration, float price, int distance) {
-		super(duration, price, distance);
+	public Walk(String id_Transport, String name_Transport, String id_island) {
+		super(id_Transport, name_Transport, id_island);
 	}
 
 	@Override
 	public int comfort() {
 		// TODO Auto-generated method stub
 		
-		int duration = getDuration();
+		/*int duration = getDuration();
 		if(duration > 40) {
 			return 0;
 		}
@@ -30,7 +30,8 @@ public class Walk extends Transport {
 		}
 		else {
 			return 10;
-		}
+		}*/
+		return 0;
 	}
 	
 	

@@ -8,9 +8,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import business.offer.Coordinate;
-import business.offer.Island;
-import business.offer.Site;
+import business.offer.*;
 import dao.PersistenceAGP;
 import lucene.LuceneTester;
 
@@ -48,7 +46,7 @@ public class jdbcPersistenceAGP implements PersistenceAGP{
 			
 	}
 	
-public static ArrayList <Site> QuerySiteOperand(String query) {
+	public static ArrayList <Site> QuerySiteOperand(String query) {
 		
 		String selectAddressQuery = query;
 		ArrayList <Site> sites = new ArrayList<Site>();
@@ -77,41 +75,131 @@ public static ArrayList <Site> QuerySiteOperand(String query) {
 			
 	}
 
-public static Site QuerySiteById(int id) {
-	Site readSite = new Site();
-	PreparedStatement preparedStatement;
+	public static Site QuerySiteById(int id) {
+		Site readSite = new Site();
+		PreparedStatement preparedStatement;
+		
+		try {
+			String selectSiteQuery = "SELECT * FROM site s, Island i WHERE s.id_island=i.id_island AND id_site = ? ";
+			preparedStatement = JdbcConnection.getConnection().prepareStatement(selectSiteQuery);
+			preparedStatement.setInt(1, id);
+			ResultSet result = preparedStatement.executeQuery();
+			
+			
 	
-	try {
-		String selectSiteQuery = "SELECT * FROM site s, Island i WHERE s.id_island=i.id_island AND id_site = ? ";
-		preparedStatement = JdbcConnection.getConnection().prepareStatement(selectSiteQuery);
-		preparedStatement.setInt(1, id);
-		ResultSet result = preparedStatement.executeQuery();
-		
-		
-
-		while (result.next()) {
-			readSite.setId_site(result.getInt("id_site"));
-			readSite.setName(result.getString("name_site"));
-			readSite.setTouristic(result.getBoolean("is_historic"));
-			Island island = new Island(result.getString("name_island"));
-			readSite.setIsland(island);
-			Coordinate coordinate = new Coordinate( result.getInt("longitude_site"),result.getInt("latitude_site"));
-			readSite.setLocation(coordinate);
+			while (result.next()) {
+				readSite.setId_site(result.getInt("id_site"));
+				readSite.setName(result.getString("name_site"));
+				readSite.setTouristic(result.getBoolean("is_historic"));
+				Island island = new Island(result.getString("name_island"));
+				readSite.setIsland(island);
+				Coordinate coordinate = new Coordinate( result.getInt("longitude_site"),result.getInt("latitude_site"));
+				readSite.setLocation(coordinate);
+			}
+	
+			preparedStatement.close();
+	
+		} catch (SQLException se) {
+			System.err.println(se.getMessage());
 		}
-
-		preparedStatement.close();
-
-	} catch (SQLException se) {
-		System.err.println(se.getMessage());
+		return readSite;
 	}
-	return readSite;
-}
 	
-
 	
-
-
+	public static ArrayList<Hotel> QueryHotelOperand(String query) {
+		
+		String selectAddressQuery = query;
+		ArrayList <Hotel> hotels = new ArrayList<Hotel>();
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = JdbcConnection.getConnection().prepareStatement(selectAddressQuery);
+			ResultSet result = preparedStatement.executeQuery();
+			
+			 
+			
+			while (result.next()) {
+			      hotels.add(new Hotel(result.getString("id_hotel"),
+			    		  result.getString("name_hotel"),
+			    		  result.getFloat("price_day"),
+			    		  new Coordinate( result.getInt("longitude_hotel"),result.getInt("latitude_hotel")),
+			    		  result.getInt("stars"),
+			    		  new Island(result.getString("id_island"))));
+			    }
+			
+			 
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return hotels;
+	}
 	
-
 	
+	public static Hotel QueryHotelById(int id) {
+		Hotel readHotel = new Hotel();
+		PreparedStatement preparedStatement;
+		
+		try {
+			String selectSiteQuery = "SELECT * FROM hotel h, Island i WHERE h.id_island=i.id_island AND id_hotel = ? ";
+			preparedStatement = JdbcConnection.getConnection().prepareStatement(selectSiteQuery);
+			preparedStatement.setInt(1, id);
+			ResultSet result = preparedStatement.executeQuery();
+			
+			
+	
+			while (result.next()) {
+				readHotel.setId_hotel(result.getString("id_site"));
+				readHotel.setName("name_hote");
+				Coordinate coordinate = new Coordinate( result.getInt("longitude_site"),result.getInt("latitude_site"));
+				readHotel.setLocation(coordinate);
+				readHotel.setStars(result.getInt("stars"));
+				Island island = new Island(result.getString("name_island"));
+				readHotel.setIsland(island);
+			}
+	
+			preparedStatement.close();
+	
+		} catch (SQLException se) {
+			System.err.println(se.getMessage());
+		}
+		return readHotel;
+	}
+	
+	
+	
+	public static ArrayList<Transport> QueryTransportOperand(String query) {
+		
+		String selectAddressQuery = query;
+		ArrayList <Transport> transports = new ArrayList<Transport>();
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = JdbcConnection.getConnection().prepareStatement(selectAddressQuery);
+			ResultSet result = preparedStatement.executeQuery();
+			
+			 
+			
+			while (result.next()) {
+				if(result.getString("name_Transport").equals("Bus")) {
+					transports.add(new Bus(result.getString("id_Transport"),
+			    		  result.getString("name_Transport"),
+			    		  result.getString("id_Island")));
+				}
+				else if(result.getString("name_Transport").equals("Boat")) {
+					transports.add(new Boat(result.getString("id_Transport"),
+				    		  result.getString("name_Transport"),
+				    		  result.getString("id_Island")));
+				}
+				else {
+					transports.add(new Walk(result.getString("id_Transport"),
+				    		  result.getString("name_Transport"),
+				    		  result.getString("id_Island")));
+				}
+			}
+			 
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return transports;
+	}
 }

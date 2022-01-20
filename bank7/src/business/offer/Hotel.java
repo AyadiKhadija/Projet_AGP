@@ -3,12 +3,14 @@ package business.offer;
 public class Hotel extends Place {
 
 	private int stars;
+	private String id_hotel;
 	
 	public Hotel() {}
 	
-	public Hotel(int stars, String name, Coordinate location, Island island, float price) {
-		super(name, location, island, price);
+	public Hotel(String id_hotel, String name_hotel, float price_day, Coordinate location, int stars, Island island) {
+		super(name_hotel, location, island, price_day);
 		this.stars = stars;
+		this.id_hotel = id_hotel;
 	}
 	
 	public int getStars() {
@@ -19,6 +21,14 @@ public class Hotel extends Place {
 		this.stars = stars;
 	}
 	
+	public String getId_hotel() {
+		return id_hotel;
+	}
+
+	public void setId_hotel(String id_hotel) {
+		this.id_hotel = id_hotel;
+	}
+
 	public int comfort() {
 		switch(stars) {
 			case 5:
@@ -35,5 +45,7 @@ public class Hotel extends Place {
 				return 2;
 		}
 	}
+	
+	
 
 }

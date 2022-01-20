@@ -8,13 +8,14 @@ import business.offer.EntryOffer;
 import business.offer.Hotel;
 import business.offer.Journey;
 import business.offer.Offer;
+import persistence.jdbc.jdbcPersistenceAGP;
 
 public class TestExcursion {
 	public static void main(String[] args) {
 		EntryOffer entry = new EntryOffer(3600, true, false, null);
 		ExcursionManager em = new ExcursionManager();
 		
-		ArrayList<Hotel> hotels = em.initHotels();
+		//ArrayList<Hotel> hotels = em.initHotels();
 		
 		//TEST 1
 		/*ArrayList<Journey> journeys = em.createJourneys(entry, hotels.get(1));
@@ -71,11 +72,20 @@ public class TestExcursion {
 		
 		
 		//TEST 4
-		OfferManager om= new OfferManager();
+		/*OfferManager om= new OfferManager();
 		ArrayList<Offer> offers = om.createMultipleOffers(entry);
 		
 		for(int i = 0; i<offers.size(); i++) {
 			System.out.println(offers.get(i).getPrice());
+		}*/
+		
+		
+		//TEST 5 
+		ArrayList<Hotel> myhotels = jdbcPersistenceAGP.QueryHotelOperand("SELECT * FROM Hotel h WHERE h.price_day<250");
+		for(int i = 0; i<myhotels.size(); i ++) {
+			System.out.println("Name : " + myhotels.get(i).getName() + " \tPrix : " + myhotels.get(i).getPrice());
 		}
+		
+		
 	}
 }

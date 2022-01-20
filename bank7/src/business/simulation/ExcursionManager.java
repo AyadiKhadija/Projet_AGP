@@ -31,20 +31,20 @@ public class ExcursionManager {
 			Boat boat = new Boat();
 			duration = getDuration(boat, distance);
 			price = getPriceTransport(boat, distance);
-			return new Boat(duration, price, distance);
+			return new Boat(duration, "Boat", distance);
 		}
 		else {
 			if(distance > 2) {
 				Bus bus = new Bus();
 				duration = getDuration(bus, distance);
 				price = getPriceTransport(bus, distance);
-				return new Bus(duration, price, distance);
+				return new Bus(duration, "Bus", distance);
 			}
 			else {
 				Walk walk = new Walk();
 				duration = getDuration(walk, distance);
 				price = getPriceTransport(walk, distance);
-				return new Walk(duration, price, distance);
+				return new Walk(duration, "Walk", distance);
 			}
 		}
 	}
