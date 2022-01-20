@@ -153,13 +153,23 @@ public class ExcursionManager {
 		return sites;
 	}
 	
-	public ArrayList<Site> sortSitebyFunction(EntryOffer entry, ArrayList<Site> wantedSites, ArrayList<Site> allSite) {
-		ArrayList<Site> sites = new ArrayList<Site>();
-		for(int i = 0; i<sites.size(); i++) {
+	public ArrayList<Place> sortSitebyFunction(EntryOffer entry, ArrayList<Site> wantedSites, ArrayList<Site> allSite) {
+		ArrayList<Place> sites = new ArrayList<Place>();
+		
+		for(int j = 0; j<wantedSites.size(); j++) {
+			sites.add(wantedSites.get(j));
+		}
+		
+		for(int i = 0; i<allSite.size(); i++) {
 			double random = Math.random();
-			if(sites.get(i).isTouristic() == entry.getIsCultural()) {
-				if(random<0.8) {
-					//sites.
+			if(allSite.get(i).isTouristic() == entry.getIsCultural()) {
+				if(random<0.6) {
+					sites.add(allSite.get(i));
+				}
+			}
+			else {
+				if(random<0.2) {
+					sites.add(allSite.get(i));
 				}
 			}
 		}
@@ -210,7 +220,7 @@ public class ExcursionManager {
 		ArrayList<Site> wantedSites = bd.executeTheQueryMixed(entry.getKeyWords());
 		ArrayList<Site> sites = sortSitebyPrice(entry, wantedSites);
 		ArrayList<Site> allSites = bd.executeListSite((int)budget);
-		ArrayList<Place> selectedSites = sortSitebyFunction(sites, entry);
+		ArrayList<Place> selectedSites = sortSitebyFunction(entry, sites, allSites);
 		
 		//int randomHotel = (int) (Math.random() * hotels.size());
 		//Place departure = hotels.get(randomHotel);
