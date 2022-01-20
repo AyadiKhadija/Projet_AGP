@@ -133,7 +133,7 @@ public class jdbcPersistenceAGP implements PersistenceAGP{
 		return hotels;
 	}
 	
-	
+/*	
 	public static Hotel QueryHotelById(int id) {
 		Hotel readHotel = new Hotel();
 		PreparedStatement preparedStatement;
@@ -164,12 +164,12 @@ public class jdbcPersistenceAGP implements PersistenceAGP{
 		return readHotel;
 	}
 	
-	
+	*/
 	
 	public static ArrayList<Transport> QueryTransportOperand(String query) {
 		
 		String selectAddressQuery = query;
-		ArrayList <Transport> transports = new ArrayList<Transport>();
+		ArrayList <Transport>  transports = new ArrayList<Transport>();
 		PreparedStatement preparedStatement;
 		try {
 			preparedStatement = JdbcConnection.getConnection().prepareStatement(selectAddressQuery);
@@ -203,19 +203,14 @@ public class jdbcPersistenceAGP implements PersistenceAGP{
 	}
 	
 	
-	public static String QueryTransportByNameIsland(String name, String id) {
+	public static String QueryTransportByNameIsland(String Query) {
 		String id_Transp = "";
 		PreparedStatement preparedStatement;
 		
 		try {
-			String selectSiteQuery = "SELECT id_Transport FROM Transport t WHERE t.id_island=? AND t.name_Transport = ? ";
+			String selectSiteQuery = Query;
 			preparedStatement = JdbcConnection.getConnection().prepareStatement(selectSiteQuery);
-			preparedStatement.setString(1, id);
-			preparedStatement.setString(2, name);
-			ResultSet result = preparedStatement.executeQuery();
-			
-			
-	
+			ResultSet result = preparedStatement.executeQuery();	
 			while (result.next()) {
 				id_Transp = result.getString("id_Transport");
 			}
@@ -227,4 +222,26 @@ public class jdbcPersistenceAGP implements PersistenceAGP{
 		}
 		return id_Transp;
 	}
+	
+	
+	
+	
+	/*public static ArrayList<Transport> QueryTransportById(String Query) {
+		PreparedStatement preparedStatement;
+		
+		try {
+			String selectSiteQuery = Query;
+			preparedStatement = JdbcConnection.getConnection().prepareStatement(selectSiteQuery);
+			ResultSet result = preparedStatement.executeQuery();	
+			while (result.next()) {
+				
+			}
+	
+			preparedStatement.close();
+	
+		} catch (SQLException se) {
+			System.err.println(se.getMessage());
+		}
+		return t;
+	}*/
 }
