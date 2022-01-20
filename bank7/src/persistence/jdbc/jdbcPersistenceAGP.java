@@ -59,7 +59,7 @@ public class jdbcPersistenceAGP implements PersistenceAGP{
 			
 			while (result.next()) {
 			      sites.add(new Site(result.getInt("id_site"),
-			    		  result.getBoolean("is_historique"),
+			    		  result.getBoolean("is_historic"),
 			    		  result.getString("name_site"),
 			    		  new Coordinate( result.getInt("longitude_site"),result.getInt("latitude_site")),
 			    		  new Island(result.getString("name_island")),
@@ -201,5 +201,31 @@ public class jdbcPersistenceAGP implements PersistenceAGP{
 			e1.printStackTrace();
 		}
 		return transports;
+	}
+	
+	
+	public static String QueryTransportByNameIsland(String name, String id) {
+		String id_Transp = "";
+		PreparedStatement preparedStatement;
+		
+		try {
+			String selectSiteQuery = "SELECT id_Transport FROM Transport t WHERE t.id_island=? AND t.name_Transport = ? ";
+			preparedStatement = JdbcConnection.getConnection().prepareStatement(selectSiteQuery);
+			preparedStatement.setString(1, id);
+			preparedStatement.setString(2, name);
+			ResultSet result = preparedStatement.executeQuery();
+			
+			
+	
+			while (result.next()) {
+				id_Transp = result.getString("id_Transport");
+			}
+	
+			preparedStatement.close();
+	
+		} catch (SQLException se) {
+			System.err.println(se.getMessage());
+		}
+		return id_Transp;
 	}
 }

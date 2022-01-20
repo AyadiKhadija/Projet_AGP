@@ -8,12 +8,16 @@ import business.offer.EntryOffer;
 import business.offer.Hotel;
 import business.offer.Journey;
 import business.offer.Offer;
+import business.offer.Site;
+import business.offer.Transport;
+import dao.BDe;
 import persistence.jdbc.jdbcPersistenceAGP;
 
 public class TestExcursion {
 	public static void main(String[] args) {
 		EntryOffer entry = new EntryOffer(3600, true, false, null);
 		ExcursionManager em = new ExcursionManager();
+			
 		
 		//ArrayList<Hotel> hotels = em.initHotels();
 		
@@ -81,11 +85,19 @@ public class TestExcursion {
 		
 		
 		//TEST 5 
-		ArrayList<Hotel> myhotels = jdbcPersistenceAGP.QueryHotelOperand("SELECT * FROM Hotel h WHERE h.price_day<250");
+		/*ArrayList<Hotel> myhotels = jdbcPersistenceAGP.QueryHotelOperand("SELECT * FROM Hotel h WHERE h.price_day<250");
 		for(int i = 0; i<myhotels.size(); i ++) {
 			System.out.println("Name : " + myhotels.get(i).getName() + " \tPrix : " + myhotels.get(i).getPrice());
-		}
+		}*/
 		
+		//TEST 6
+		/*ArrayList<Transport> transports = jdbcPersistenceAGP.QueryTransportOperand("SELECT * FROM Transport t WHERE t.id_island = 1111");
+		for(int i = 0; i<transports.size(); i ++) {
+			System.out.println("Name : " + transports.get(i).getName_Transport());
+		}*/
 		
+		//TEST7
+		String id_Transport = jdbcPersistenceAGP.QueryTransportByNameIsland("Bateau", "1111");
+		System.out.println(id_Transport);
 	}
 }
