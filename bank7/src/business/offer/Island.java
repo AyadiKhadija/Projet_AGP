@@ -1,19 +1,29 @@
 package business.offer;
 
 public class Island {
-	private String name;
+	private String id_island;
+	private String name_island;
 	
 	public Island() {	}
 	
-	public Island(String name) {
-		this.name = name;
+	public Island(String id_island, String name_island) {
+		this.id_island = id_island;
+		this.name_island = name_island;
 	}
 	
-	public String getName() {
-		return name;
+	public String getId_island() {
+		return id_island;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
+
+	public void setId_island(String id_island) {
+		this.id_island = id_island;
+	}
+
+	public String getName_island() {
+		return name_island;
+	}
+
+	public void setName_island(String name_island) {
+		this.name_island = name_island;
 	}
 }

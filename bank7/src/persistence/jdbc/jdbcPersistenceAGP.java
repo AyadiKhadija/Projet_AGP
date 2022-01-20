@@ -62,7 +62,7 @@ public class jdbcPersistenceAGP implements PersistenceAGP{
 			    		  result.getBoolean("is_historic"),
 			    		  result.getString("name_site"),
 			    		  new Coordinate( result.getInt("longitude_site"),result.getInt("latitude_site")),
-			    		  new Island(result.getString("name_island")),
+			    		  new Island(result.getString("id_island") ,result.getString("name_island")),
 			    		  result.getInt("price")));
 			    }
 			
@@ -91,7 +91,7 @@ public class jdbcPersistenceAGP implements PersistenceAGP{
 				readSite.setId_site(result.getInt("id_site"));
 				readSite.setName(result.getString("name_site"));
 				readSite.setTouristic(result.getBoolean("is_historic"));
-				Island island = new Island(result.getString("name_island"));
+				Island island = new Island(result.getString("id_island") ,result.getString("name_island"));
 				readSite.setIsland(island);
 				Coordinate coordinate = new Coordinate( result.getInt("longitude_site"),result.getInt("latitude_site"));
 				readSite.setLocation(coordinate);
@@ -123,7 +123,7 @@ public class jdbcPersistenceAGP implements PersistenceAGP{
 			    		  result.getFloat("price_day"),
 			    		  new Coordinate( result.getInt("longitude_hotel"),result.getInt("latitude_hotel")),
 			    		  result.getInt("stars"),
-			    		  new Island(result.getString("id_island"))));
+			    		  new Island(result.getString("id_island") ,result.getString("name_island"))));
 			    }
 			
 			 
@@ -153,7 +153,7 @@ public class jdbcPersistenceAGP implements PersistenceAGP{
 				Coordinate coordinate = new Coordinate( result.getInt("longitude_site"),result.getInt("latitude_site"));
 				readHotel.setLocation(coordinate);
 				readHotel.setStars(result.getInt("stars"));
-				Island island = new Island(result.getString("name_island"));
+				Island island = new Island(result.getString("id_island") ,result.getString("name_island"));
 				readHotel.setIsland(island);
 			}
 	
