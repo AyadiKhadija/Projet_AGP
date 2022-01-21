@@ -1,6 +1,6 @@
 package persistence.jdbc;
 
-import persistence.jdbc.JdbcPersistence;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -86,7 +86,6 @@ public class MixedQuery {
             System.out.println("id : "+keySite+" Score : "+scoreMax);
             System.out.println("hello");
             sortedList.put(keySite, scoreMax);
-            //System.out.println("ID : " + site.getIdPlace() + "  |  Nom : " + site.getName() + "  |  Score : " + scoreMax);
 
             hm.remove(keySite);
             IdSiteSorted.add(keySite);

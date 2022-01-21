@@ -30,6 +30,8 @@ public class EntryBean {
 	}
 
 	public String startSimulation() {
+		System.out.println(entry.getKeyWords().get(0));
+		
 		offermanager.createMultipleOffers(entry);
 		//offermanager.buildBank();
 		//offermanager.simulate();

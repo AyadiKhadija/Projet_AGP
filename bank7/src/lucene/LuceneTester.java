@@ -12,11 +12,15 @@ import org.apache.lucene.search.TopDocs;
 
 public class LuceneTester {
 		
-	   String indexDir = "C:\\Users\\billf\\OneDrive\\Documents\\Etudes Sup\\M1 SIC IISC\\AGP\\LuceneIndex";// inserer le chemin de l'index
-	   String dataDir = "C:\\Users\\billf\\OneDrive\\Documents\\Etudes Sup\\M1 SIC IISC\\AGP\\LuceneDocs";// inserer le chemin du dossier qui contient nos fichier test
+	   String indexDir = "/Users/fatiatravaille/git/Projet_AGP/bank7/Index";// inserer le chemin de l'index
+	   String dataDir;
 	   Indexer indexer;
 	   Searcher searcher;
        HashMap<String, Float> map = new HashMap<>();
+       
+       public LuceneTester(String dataDir) {
+    	   this.dataDir=dataDir;
+       }
 
 	   
 	   public void createIndex() throws IOException {
@@ -32,7 +36,6 @@ public class LuceneTester {
 	   
 	   public HashMap<String, Float> search(String searchQuery) throws IOException, ParseException {
 	      System.out.println("search : " + searchQuery);
-	      //searchQuery="montagne";
 	      System.out.println("search : " + searchQuery);
 		   searcher = new Searcher(indexDir);
 	      long startTime = System.currentTimeMillis();
@@ -52,8 +55,6 @@ public class LuceneTester {
 	         map.put((doc.get(LuceneConstants.FILE_NAME).split("[.]"))[0], scoreDoc.score);
 	            System.out.println("File: "
 	            + doc.get(LuceneConstants.FILE_PATH));
-	            //System.out.println((doc.get(LuceneConstants.FILE_NAME).split("[.]"))[0]);
-	            //System.out.println(map.get((doc.get(LuceneConstants.FILE_NAME).split("[.]"))[0]));
 	            deleteDirectory(indexDir);
 	            
 	      }
@@ -81,7 +82,7 @@ public class LuceneTester {
 	   public void mySearch(String Word){
 		   LuceneTester tester;
 		   try {
-				tester = new LuceneTester();
+				tester = new LuceneTester("/Users/fatiatravaille/Downloads/sites");
 				tester.createIndex();
 
 					System.out.println("mySearch : " + Word);

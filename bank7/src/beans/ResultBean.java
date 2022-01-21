@@ -7,13 +7,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-import org.primefaces.model.chart.PieChartModel;
+
 
 import business.offer.Journey;
 import business.offer.Offer;
 import business.simulation.Excursion;
 import business.simulation.OfferManager;
-import business.simulation.Simulation;
 import dao.StatisticPersistence;
 
 /**

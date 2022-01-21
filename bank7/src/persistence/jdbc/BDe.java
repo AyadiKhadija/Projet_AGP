@@ -8,13 +8,13 @@ import business.offer.Transport;
 
 public class BDe {
 	
-	//renvoie la liste des sites inferieurs a un prix donnée
+	//renvoie la liste des sites inferieurs a un prix donnï¿½e
 	public ArrayList <Site> executeListSite(int price) {
 		jdbcPersistenceAGP jd = new jdbcPersistenceAGP();
-		return jd.QuerySiteOperand("SELECT * FROM Site s, Island i WHERE s.id_island=i.id_island where s.price <"+price);
+		return jd.QuerySiteOperand("SELECT * FROM Site s, Island i WHERE s.id_island=i.id_island and s.price <"+price);
 	}
 	
-	//renvoie la liste des hotel inferieurs a un prix donnée
+	//renvoie la liste des hotel inferieurs a un prix donnï¿½e
 	public ArrayList<Hotel> executeListHotel(int price){
 		jdbcPersistenceAGP jd = new jdbcPersistenceAGP();
 		return jd.QueryHotelOperand("Select * from hotel h, island i where h.id_island=i.id_island and h.price_day <"+price);

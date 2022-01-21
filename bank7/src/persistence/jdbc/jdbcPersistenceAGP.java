@@ -23,19 +23,7 @@ public class jdbcPersistenceAGP implements PersistenceAGP{
 		try {
 			preparedStatement = JdbcConnection.getConnection().prepareStatement(selectAddressQuery);
 			result = preparedStatement.executeQuery();
-			
-			 
-			/*
-			while (result.next()) {
-			      sites.add(new Site(result.getInt("id_site"),
-			    		  result.getBoolean("is_historique"),
-			    		  result.getString("name_site"),
-			    		  new Coordinate( result.getInt("longitude_site"),result.getInt("latitude_site")),
-			    		  new Island(result.getString("name_island")),
-			    		  result.getInt("price")));
-			    }
-			
-			 */
+
 			
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block

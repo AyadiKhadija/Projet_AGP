@@ -81,7 +81,7 @@ public class TestExcursion {
 			}
 			
 		}
-		System.out.println("Le prix total de l'offre est " + offer.getPrice() + "€");
+		System.out.println("Le prix total de l'offre est " + offer.getPrice() + "ï¿½");
 		
 		
 		

@@ -92,44 +92,6 @@ public class ExcursionManager {
 	}
 	
 	
-	/*public ArrayList<Place> sortHotelbyPrice(EntryOffer entry) {
-		float hotelBudget = entry.getMaxPrice()*0.6f;
-		float budgetPerNight = hotelBudget/5;
-		ArrayList<Hotel> hotels = initHotels();
-		ArrayList<Place> myHotels = new ArrayList<Place>();
-		
-		for(int i = 0; i<hotels.size(); i++) {
-			//System.out.println(budgetPerNight + "--" +hotels.get(i).getPrice()+"\n\n" );
-			if(hotels.get(i).getPrice()<=budgetPerNight) {
-				myHotels.add(hotels.get(i));
-			}
-		}
-		
-		return myHotels;
-	}
-	
-	public ArrayList<Site> sortSitebyPrice(EntryOffer entry) {
-		float siteBudget = entry.getMaxPrice() * 0.4f;
-		ArrayList<Site> sites = initSites();
-		ArrayList<Site> mySites = new ArrayList<Site>();
-		
-		int budgetForSite;
-		if(entry.getIsIntensity() == true) {
-			budgetForSite = (int)siteBudget/10;
-		}
-		else {
-			budgetForSite = (int)siteBudget/4;
-		}
-		
-		for(int i = 0; i<sites.size(); i++) {
-			if(sites.get(i).getPrice()<budgetForSite) {
-				mySites.add(sites.get(i));
-			}
-		}
-		System.out.println("Tailles de l'AL des sites possible pour moi " + mySites.size());
-		return mySites;
-	}*/
-	
 	public ArrayList<Place> sortHotelbyPrice(EntryOffer entry) {
 		float budget = budgetPerPrice(entry, "Hotel");
 		ArrayList<Hotel> hotels = bd.executeListHotel((int)budget);
@@ -143,7 +105,6 @@ public class ExcursionManager {
 	
 	public ArrayList<Site> sortSitebyPrice(EntryOffer entry, ArrayList<Site> wantedSites) {
 		float budget = budgetPerPrice(entry, "Site");
-		//ArrayList<Site> sites = bd.executeListSite((int)budget);
 		ArrayList<Site> sites = new ArrayList<Site>();
 		for(int i = 0; i<wantedSites.size(); i++) {
 			if(wantedSites.get(i).getPrice()<budget) {
@@ -156,12 +117,10 @@ public class ExcursionManager {
 	public ArrayList<Place> sortSitebyFunction(EntryOffer entry, ArrayList<Site> wantedSites, ArrayList<Site> allSite) {
 		ArrayList<Place> sites = new ArrayList<Place>();
 		
-		//(int i = 0; i<2; i++) {
+		
 			for(int j = 0; j<wantedSites.size(); j++) {
 				sites.add(wantedSites.get(j));
 			}
-		//}
-		//Tu pense que vous pouvez terminer le rapport COO ce soir ?! ???????
 		for(int i = 0; i<allSite.size(); i++) {
 			double random = Math.random();
 			if(allSite.get(i).isTouristic() == entry.getIsCultural()) {
@@ -180,36 +139,17 @@ public class ExcursionManager {
 		return sites;
 	}
 	
-	
-	/*public ArrayList<Place> sortSitebyFunction(ArrayList<Site> sites, EntryOffer entry) {
-		ArrayList<Place> siteByFunction = new ArrayList<Place>();
-		for(int i = 0; i<sites.size(); i++) {
-			double random = Math.random();
-			if(sites.get(i).isTouristic() == entry.getIsCultural()) {
-				siteByFunction.add((Place)sites.get(i));
-			}
-			else {
-				if(entry.getMaxPrice()>3500) {
-					if(random<0.2) siteByFunction.add((Place)sites.get(i));
-				}
-				else {
-					if(random<0.5) siteByFunction.add((Place)sites.get(i));
-				}
-			}
-		}
-		return siteByFunction;
-	}*/
-	
+
 	
 	public ArrayList<Place> radius(Place departure, ArrayList<Place> place) {
 		ArrayList<Place> compatiblePlaces = new ArrayList<Place>();
 		
 		for(int i = 0; i<place.size();i++) {
-			if(getDistance(departure, place.get(i))<250) {
+			if(getDistance(departure, place.get(i))<1000) {
 				compatiblePlaces.add(place.get(i));
 			}
 		}
-		//System.out.println("Places compatible avec moi " + compatiblePlaces.size());
+		
 		return compatiblePlaces;
 	}
 	
@@ -224,8 +164,6 @@ public class ExcursionManager {
 		ArrayList<Site> allSites = bd.executeListSite((int)budget);
 		ArrayList<Place> selectedSites = sortSitebyFunction(entry, sites, allSites);
 		
-		//int randomHotel = (int) (Math.random() * hotels.size());
-		//Place departure = hotels.get(randomHotel);
 		int randomHotel;
 		Place arrival;
 		 
@@ -255,7 +193,6 @@ public class ExcursionManager {
 					break;
 				}
 				else {
-					//places = radius(departure,selectedSites);
 					int randomSite = (int) (Math.random() * places.size());
 					while(places.get(randomSite).getName().equals(departure.getName())) {
 						randomSite = (int) (Math.random() * places.size());
@@ -268,13 +205,7 @@ public class ExcursionManager {
 				randomHotel = (int) (Math.random() * places.size());
 				arrival = places.get(randomHotel);
 			}
-			/*int distance = getDistance(departure, arrival);
-			Transport transport = getTransport(departure, arrival);
-			float transportPrice = getPriceTransport(transport, distance);
-			transport.setPrice((int)transportPrice);
-			float price = getPriceJourney(departure, arrival, transport, distance);
-			System.out.println("Le prix du trajet sans l'hotel est " + price + "�" + "("+ transportPrice + "� pour transport et " + (price - transportPrice) + "� pour le site pour " + distance + "km)");
-			int duration = getDuration(transport, distance);*/
+			
 			Journey journey = addJourney(departure, arrival);
 			journeys.add(journey);
 			System.out.println(journeys.size());

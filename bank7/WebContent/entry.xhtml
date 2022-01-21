@@ -6,13 +6,14 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<title>Simulation offre</title>
+	<link rel="stylesheet" href="style.css" media="screen" type="text/css" />
 </h:head>
 <h:body>
 	<p>
 		<strong>Welcome to trip offer simulation !</strong>
 	</p>
 	
-	<img alt="Image Canaries" src="canaries.jpg"  width="400" height="310"></img>
+	<img alt="Image Canaries" src="./canaries.jpg"  width="400" height="310"></img>
 
 	<h2>Veuillez entrer vos selections pour votre sejour</h2>
 	<fieldset>
@@ -42,13 +43,13 @@
 			
 			Quelles activites souhaitez vous faire ?<br />
 				<h:selectManyCheckbox layout="pageDirection" value="#{entryBean.keyWords}">
-				  <f:selectItem itemValue="id5" itemLabel="Jet ski" />
-				  <f:selectItem itemValue="id6" itemLabel="Parachute" />
-				  <f:selectItem itemValue="id7" itemLabel="Musee" />
-				  <f:selectItem itemValue="id8" itemLabel="Escalade" />
-				  <f:selectItem itemValue="id8" itemLabel="Corridor" />
-				  <f:selectItem itemValue="id8" itemLabel="Grotte" />
-				  <f:selectItem itemValue="id8" itemLabel="Randonnée" />
+				  <f:selectItem itemValue="jet" itemLabel="Jet ski" />
+				  <f:selectItem itemValue="montagne" itemLabel="Parachute" />
+				  <f:selectItem itemValue="pont" itemLabel="Musee" />
+				  <f:selectItem itemValue="escalade" itemLabel="Escalade" />
+				  <f:selectItem itemValue="corridor" itemLabel="Corridor" />
+				  <f:selectItem itemValue="grotte" itemLabel="Grotte" />
+				  <f:selectItem itemValue="4x4" itemLabel="Randonnée" />
 				</h:selectManyCheckbox><br />
 			
 			

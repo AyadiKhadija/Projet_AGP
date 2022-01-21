@@ -9,15 +9,7 @@ public class OfferManager {
 	
 	private ArrayList<Offer> offers = new ArrayList<Offer>();
 	
-/*	public Offer createOffer(EntryOffer entry) {
-		
-		float price = 0;
-		ExcursionManager excManager = new ExcursionManager();
-		for(int i = 0; i<5;i++) {
-			excManager.createExcursion(i+1, entry, 2);
-		}
-		return new Offer(13f, null);
-	}*/
+
 	
 	public Offer createOffer(EntryOffer entry) {	
 		
@@ -103,20 +95,7 @@ public class OfferManager {
 		return listOffers;
 	}
 	
-	/*public HashMap<Offer, Float> getTotalPrice() {
-		HashMap<Offer, Float> prices = new HashMap<Offer, Float>();
-	
-		float total;
-
-		for(int i = 0; i<offers.size(); i++) {
-			total = 0;
-			for(int j = 0; i<offers.get(i).getExcursions().size(); j++) {
-				total = offers.get(i).getExcursions().get(j).getPrice();
-			}
-			prices.put(offers.get(i), total);
-		}
-		return prices;
-	}
+	/*
 	
 	public HashMap<Offer, Integer> getComfort() {
 		HashMap<Offer, Float> prices = new HashMap<Offer, Float>();

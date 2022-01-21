@@ -15,7 +15,7 @@
 		</legend>
 		
 		
-		<p:dataTable id="offerTable" var="offer" value="#{resultBean.offers}">
+		<p:dataTable id="offerTable" var="offer" value="#{resultBean.offers}" >
 			<p:column headerText="Proposition d'offre">
                 <h:outputText value="Nous vous proposons une offre a #{offer.price} €" />
             </p:column>
@@ -33,9 +33,17 @@
                 				<p:dataList var="j" value="#{route.value}">
                 					
                 					<strong><h:outputText value="Depart : " /></strong>
-                					<h:outputText value="#{j.departure.name}" /><br />
+                					<h:outputText value="#{j.departure.name}" />
+                					<strong><h:outputText value=" Dont l'ile est : " /></strong>
+                					<h:outputText value="#{j.departure.island.name_island}" />
+                					<br />
                 					<strong><h:outputText value="Arrivee : " /></strong>
-                					<h:outputText value="#{j.arrival.name}" /><br />
+                					<h:outputText value="#{j.arrival.name}" />
+                					<strong><h:outputText value=" Dont l'ile est : " /></strong>
+                					<h:outputText value="#{j.arrival.island.name_island}" />
+                					<br />
+                					<strong><h:outputText value="Moyen de transport : " /></strong>
+                					<h:outputText value="#{j.transport.name_Transport}" /><br />
                 					<strong><h:outputText value="Prix trajet : " /></strong>
                 					<h:outputText value="#{j.price}" /><br /><br />
 
